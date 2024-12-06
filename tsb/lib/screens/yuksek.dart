@@ -1,0 +1,127 @@
+import 'package:flutter/material.dart';
+
+class YuksekAtlamaPage extends StatelessWidget {
+  const YuksekAtlamaPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Yüksek Atlama Antrenman Planı"),
+        backgroundColor: const Color.fromARGB(255, 0, 17, 255), // Orange color
+      ),
+      body: ListView(
+        children: [
+          // Month 1-4 - Basic Preparation Phase
+          _buildCard(
+            context,
+            title: "Temel Hazırlık Dönemi (1-4. Aylar)",
+            content:
+                "Bu dönemde genel kuvvet, dayanıklılık, esneklik ve temel teknik çalışmaları yapılır.",
+            backgroundColor: const Color.fromARGB(255, 0, 8, 255), // Orange color
+            textColor: Colors.white,
+          ),
+          _buildCard(
+            context,
+            title: "1-2. Aylar (Genel Kuvvet ve Dayanıklılık)",
+            content:
+                "Haftada 3-4 gün kuvvet çalışması: squat, deadlift, lunge, core egzersizleri.",
+            backgroundColor: const Color.fromARGB(255, 0, 17, 255), // Orange color
+            textColor: Colors.white,
+          ),
+          _buildCard(
+            context,
+            title: "3-4. Aylar (Esneklik ve Teknik Temeli)",
+            content:
+                "Teknik odaklı çalışmalar: adım sayısı, sıçrama açısı ve atlayış tekniği çalışmaları.",
+            backgroundColor: const Color.fromARGB(255, 8, 0, 255), // Orange color
+            textColor: Colors.white,
+          ),
+
+          // Month 5-9 - Specific Preparation Phase
+          _buildCard(
+            context,
+            title: "Spesifik Hazırlık Dönemi (5-9. Aylar)",
+            content:
+                "Bu dönemde patlayıcı güç, hız ve teknik geliştirmeye odaklanılır.",
+            backgroundColor: const Color.fromARGB(255, 0, 42, 255), // Orange color
+            textColor: Colors.white,
+          ),
+          _buildCard(
+            context,
+            title: "5-6. Aylar (Patlayıcı Güç ve Teknik)",
+            content:
+                "Haftada 2-3 gün kuvvet antrenmanları (yüksek ağırlık-düşük tekrar).",
+            backgroundColor: const Color.fromARGB(255, 25, 0, 255), // Orange color
+            textColor: Colors.white,
+          ),
+          _buildCard(
+            context,
+            title: "7-8. Aylar (Hız ve Teknik)",
+            content:
+                "Koşu ve sıçrama teknikleri: sprint sonrası sıçrama ve diz çekme çalışmaları.",
+            backgroundColor: const Color.fromARGB(255, 0, 42, 255), // Orange color
+            textColor: Colors.white,
+          ),
+          _buildCard(
+            context,
+            title: "9. Ay (Dayanıklılık ve Toparlanma)",
+            content:
+                "Düşük yoğunluklu hız ve dayanıklılık antrenmanları.",
+            backgroundColor: const Color.fromARGB(255, 0, 0, 255), // Orange color
+            textColor: Colors.white,
+          ),
+
+          // Month 10-12 - Competition Phase
+          _buildCard(
+            context,
+            title: "Yarışma Dönemi (10-12. Aylar)",
+            content:
+                "Bu dönemde, en iyi performans için teknik, hız ve patlayıcı güç üzerine yoğunlaşılır.",
+            backgroundColor: const Color.fromARGB(255, 0, 38, 255), // Orange color
+            textColor: Colors.white,
+          ),
+          _buildCard(
+            context,
+            title: "10-11. Aylar (Teknik Odaklı Yoğun Çalışma ve Yarışma Simülasyonu)",
+            content:
+                "Tam hızda yüksek atlama çalışmaları: koşu sonrası tam sıçrama denemeleri.",
+            backgroundColor: const Color.fromARGB(255, 0, 38, 255), // Orange color
+            textColor: Colors.white,
+          ),
+          _buildCard(
+            context,
+            title: "12. Ay (Dinlenme ve Yarışma)",
+            content:
+                "Yarış öncesi yoğunluğu azalt, haftada 1-2 hafif teknik çalışma.",
+            backgroundColor: const Color.fromARGB(255, 0, 17, 255), // Orange color
+            textColor: Colors.white,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCard(
+    BuildContext context, {
+    required String title,
+    required String content,
+    required Color backgroundColor,
+    required Color textColor,
+  }) {
+    return Card(
+      margin: const EdgeInsets.all(10),
+      color: backgroundColor,
+      child: ListTile(
+        title: Text(
+          title,
+          style: TextStyle(fontSize: 18, color: textColor),
+        ),
+        subtitle: Text(
+          content,
+          style: TextStyle(fontSize: 14, color: textColor),
+        ),
+      ),
+    );
+  }
+}

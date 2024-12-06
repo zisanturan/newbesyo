@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "577376604543",
+    "firebase_url": "https://besyocity-197ae-default-rtdb.firebaseio.com",
+    "project_id": "besyocity-197ae",
+    "storage_bucket": "besyocity-197ae.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577376604543:android:65edc09efe558c99c84a4a",
+        "android_client_info": {
+          "package_name": "com.tsb.besyocity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDucX_l53Z5dXmksG_a_PfYKZ5hxREMM9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577376604543:android:8c84fba91c7053dac84a4a",
+        "android_client_info": {
+          "package_name": "com.turkiyesporbilimleri.besyocity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDucX_l53Z5dXmksG_a_PfYKZ5hxREMM9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577376604543:android:19bff67e790e8858c84a4a",
+        "android_client_info": {
+          "package_name": "com.turkiyesporbilimleri.besyocity.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDucX_l53Z5dXmksG_a_PfYKZ5hxREMM9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

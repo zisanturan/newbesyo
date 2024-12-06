@@ -1,0 +1,72 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.tsb.besyocity"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        applicationId = "com.tsb.besyocity"
+        minSdk = 23
+        targetSdk = flutter.targetSdkVersion
+        versionCode = 3
+        versionName = flutter.versionName
+    }
+
+    signingConfigs {
+        release {
+            def keystoreProperties = new Properties()
+            def keystoreFile = file("key.properties") // Projeye göre yol belirleyin
+
+            if (keystoreFile.exists()) {
+                keystoreProperties.load(new FileInputStream(keystoreFile))
+
+                storeFile file(keystoreProperties['storeFile']) // Keystore dosyasının yolu
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            } else {
+                println "WARNING: key.properties file not found. Release build will not be signed!"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release // Release imzasını kullan
+            minifyEnabled true // R8 veya Proguard optimizasyonunu etkinleştirin
+            shrinkResources true // Gereksiz kaynakları temizleyin
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // NDK sembol dosyalarını oluşturmak için tam debug sembol dosyalarını etkinleştirin
+            ndk {
+                debugSymbolLevel 'FULL' // Debug sembol dosyalarını tam olarak oluştur
+            }
+        }
+
+        debug {
+            signingConfig signingConfigs.release // Debug modda da aynı imzayı kullanabilirsiniz (opsiyonel)
+        }
+    }
+
+    buildFeatures {
+        viewBinding true // Eğer View Binding kullanıyorsanız
+    }
+}
+
+flutter {
+    source = "../.."
+}
