@@ -1,16 +1,19 @@
 workflows:
-  ios-workflow:
-    name: iOS Workflow
-    environment:
-      vars:
-        APP_STORE_CONNECT_PRIVATE_KEY: Encrypted(your_private_key)  # Private key'inizi şifreleyin
-      xcode: latest
-      flutter: latest
+  android:
+    name: Android Build
+    description: Flutter Android Build Workflow
+    # Android platformu için ayarları ekleyebilirsiniz
+    platform: android
+    # Flutter komutunu çalıştırarak projeyi oluşturma
+    scripts:
+      - flutter pub get
+      - flutter build apk --release
+  ios:
+    name: iOS Build
+    description: Flutter iOS Build Workflow
+    platform: ios
+    # iOS için yapılandırmalar
     scripts:
       - flutter pub get
       - flutter build ios --release
-    publishing:
-      app_store_connect:
-        api_key_id: WX2DLKJQRX  # Key ID'nizi buraya yazın
-        issuer_id: T59533R2XV  # Issuer ID'nizi buraya yazın
-        private_key: Encrypted(Mertask9)  # Private key'inizi buraya yazın
+
