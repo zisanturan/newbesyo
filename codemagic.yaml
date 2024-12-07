@@ -6,7 +6,6 @@ workflows:
     scripts:
       - name: Flutter bağımlılıklarını yükle
         script: |
-          cd C:/Users/zisan/OneDrive/Masaüstü/GitHub/newbesyo  # Projenizin bulunduğu dizine git
           flutter pub get
           flutter build ios --release --no-codesign
     artifacts:
