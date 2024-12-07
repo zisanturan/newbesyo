@@ -1,19 +1,45 @@
 workflows:
-  android:
-    name: Android Build
-    description: Flutter Android Build Workflow
-    # Android platformu için ayarları ekleyebilirsiniz
-    platform: android
-    # Flutter komutunu çalıştırarak projeyi oluşturma
+  ios-workflow:
+    name: iOS Workflow
+    environment:
+      flutter: stable
     scripts:
-      - flutter pub get
-      - flutter build apk --release
-  ios:
-    name: iOS Build
-    description: Flutter iOS Build Workflow
-    platform: ios
-    # iOS için yapılandırmalar
-    scripts:
-      - flutter pub get
-      - flutter build ios --release
+      - name: Flutter bağımlılıklarını yükle
+        script: |
+          flutter pub get
+          flutter build ios --release --no-codesign
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com
+        api_key_id: CCKZZW6UYU
+        api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7
+        api_key_file: C:\Users\zisan\Downloads\AuthKey_CCKZZW6UYU.p8
+        submit_to_testflight: true
+    cache:
+      paths:
+        - ~/.pub-cache
+        - ~/.cocoapods/repos
+        - ~/Library/Caches/CocoaPods
 
+  android-workflow:
+    name: Android Workflow
+    environment:
+      flutter: stable
+    scripts:
+      - name: Flutter bağımlılıklarını yükle
+        script: |
+          flutter pub get
+          flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+    publishing:
+      google_play:
+        service_account_json: $GOOGLE_PLAY_SERVICE_ACCOUNT_JSON
+        track: production
+    cache:
+      paths:
+        - ~/.pub-cache
+        - ~/.gradle/caches
+        - ~/.gradle/wrapper
