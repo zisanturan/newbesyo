@@ -13,11 +13,11 @@ workflows:
       - build/ios/ipa/*.ipa
     publishing:
       app_store_connect:
-        apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com # Apple Kimliği
-        app_specific_password: tsbbes # Uygulamaya özel parola
+        apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com  # Apple Kimliği
+        app_specific_password: tsbbes  # Uygulamaya özel parola
         api_key_id: CCKZZW6UYU
         api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7
-        api_key_file: "C:/Users/zisan/Downloads/AuthKey_CCKZZW6UYU.p8" # API key dosyasının yolu
+        api_key_file: "C:\Users\zisan\Downloads\AuthKey_CCKZZW6UYU.p8"  # API key dosyasının yolu
         submit_to_testflight: true
     cache:
       paths:
@@ -25,19 +25,3 @@ workflows:
         - ~/.cocoapods/repos
         - ~/Library/Caches/CocoaPods
 
-  android-workflow:
-    name: Android Workflow
-    environment:
-      flutter: stable
-    scripts:
-      - name: Flutter bağımlılıklarını yükle
-        script: |
-          flutter pub get
-          flutter build apk --release
-    artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
-    cache:
-      paths:
-        - ~/.pub-cache
-        - ~/.gradle/caches
-        - ~/.gradle/wrapper
