@@ -6,10 +6,7 @@ workflows:
     scripts:
       - name: Flutter bağımlılıklarını yükle
         script: |
-<<<<<<< HEAD
-          cd C:/Users/zisan/OneDrive/Masaüstü/GitHub/newbesyo/tsb  # Projenizin bulunduğu dizine git
-=======
->>>>>>> 926cb0af15a5f5bbfb0de4929f5a253a59401543
+          cd C:/Users/zisan/OneDrive/Masaüstü/GitHub/newbesyo  # Projenizin bulunduğu dizine git
           flutter pub get
           flutter build ios --release --no-codesign
     artifacts:
@@ -19,19 +16,13 @@ workflows:
         apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com
         api_key_id: CCKZZW6UYU
         api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7
-<<<<<<< HEAD
-        api_key_file: C:/Users/zisan/Downloads/AuthKey_CCKZZW6UYU.p8 # Dosya yolu düz slash ile verilmeli
-=======
         api_key_file: "C:/Users/zisan/Downloads/AuthKey_CCKZZW6UYU.p8"  # Dosya yolu burada doğru şekilde verilmiştir
->>>>>>> 926cb0af15a5f5bbfb0de4929f5a253a59401543
         submit_to_testflight: true
     cache:
       paths:
         - ~/.pub-cache
         - ~/.cocoapods/repos
         - ~/Library/Caches/CocoaPods
-<<<<<<< HEAD
-=======
 
   android-workflow:
     name: Android Workflow
@@ -53,4 +44,4 @@ workflows:
         - ~/.pub-cache
         - ~/.gradle/caches
         - ~/.gradle/wrapper
->>>>>>> 926cb0af15a5f5bbfb0de4929f5a253a59401543
+
