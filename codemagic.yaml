@@ -3,9 +3,10 @@ workflows:
     name: iOS Workflow
     environment:
       vars:
-        APP_STORE_CONNECT_API_KEY_ID: CCKZZW6UYU        # API Key ID
-        APP_STORE_CONNECT_API_KEY_ISSUER_ID: 2b87fc77-2aad-4934-8e80-12db199796b7  # API Key Issuer ID
-        APP_STORE_CONNECT_PRIVATE_KEY: |                # Private key, burada Base64 kodlu değil, dosya olarak kullanılır
+        APP_STORE_CONNECT_API_KEY_ID: CCKZZW6UYU # API Key ID
+        APP_STORE_CONNECT_API_KEY_ISSUER_ID: 2b87fc77-2aad-4934-8e80-12db199796b7 # API Key Issuer ID
+        APP_STORE_CONNECT_PRIVATE_KEY:
+          | # Private key, burada Base64 kodlu değil, dosya olarak kullanılır
           -----BEGIN PRIVATE KEY-----
           MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQggfFcZI50Q7rzSo+S
           8oEGxkBoCRWNHshyQ3mJVLcNnwSgCgYIKoZIzj0DAQehRANCAAT1JEMM/YHu03Lx
@@ -21,7 +22,8 @@ workflows:
       - build/ios/ipa/*.ipa
     publishing:
       app_store_connect:
-        api_key_id: WX2DLKJQRX
+        api_key_id: CCKZZW6UYU
         api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7
-        api_key_private_key: ydxn-hgqb-xqgq-xjya
+        apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com # Apple Kimliği
+        app_specific_password: tsbbes
         submit_to_testflight: true
