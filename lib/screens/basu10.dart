@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BasketbolU10U12Page extends StatelessWidget {
-  const BasketbolU10U12Page({Key? key}) : super(key: key);
+  const BasketbolU10U12Page({super.key});
 
   @override
   Widget build(BuildContext context) {

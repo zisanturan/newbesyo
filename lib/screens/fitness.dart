@@ -121,7 +121,7 @@ class TrainingQuarterCard extends StatelessWidget {
                   ),
                 ),
               );
-            }).toList(),
+            }),
           ],
         ),
       ),

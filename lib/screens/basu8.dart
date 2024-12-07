@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 // ignore: camel_case_types
 class BasketbolU8Page extends StatelessWidget {
-  const BasketbolU8Page({Key? key}) : super(key: key);
+  const BasketbolU8Page({super.key});
 
   @override
   Widget build(BuildContext context) {

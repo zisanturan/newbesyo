@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SoruSorPage extends StatefulWidget {
-  const SoruSorPage({Key? key}) : super(key: key);
+  const SoruSorPage({super.key});
 
   @override
   // ignore: library_private_types_in_public_api

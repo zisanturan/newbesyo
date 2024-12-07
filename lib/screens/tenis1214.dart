@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TenisU14ProgramPage extends StatelessWidget {
-  const TenisU14ProgramPage({Key? key}) : super(key: key);
+  const TenisU14ProgramPage({super.key});
 
   @override
   Widget build(BuildContext context) {

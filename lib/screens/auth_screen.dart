@@ -5,7 +5,7 @@ import 'home_screen.dart';
 import 'sign_up_screen.dart';
 
 class AuthScreen extends StatefulWidget {
-  const AuthScreen({Key? key}) : super(key: key);
+  const AuthScreen({super.key});
 
   @override
   // ignore: library_private_types_in_public_api

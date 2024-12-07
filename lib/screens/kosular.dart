@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class KosularPage extends StatelessWidget {
-  const KosularPage({Key? key}) : super(key: key);
+  const KosularPage({super.key});
 
   @override
   Widget build(BuildContext context) {

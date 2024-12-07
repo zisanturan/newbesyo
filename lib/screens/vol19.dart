@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VoleybolU19PlusPage extends StatelessWidget {
-  const VoleybolU19PlusPage({Key? key}) : super(key: key);
+  const VoleybolU19PlusPage({super.key});
 
   @override
   Widget build(BuildContext context) {

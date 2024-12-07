@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 // ignore: camel_case_types
 class VoleybolU17_19Page extends StatelessWidget {
-  const VoleybolU17_19Page({Key? key}) : super(key: key);
+  const VoleybolU17_19Page({super.key});
 
   @override
   Widget build(BuildContext context) {
