@@ -16,7 +16,6 @@ workflows:
         apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com
         api_key_id: CCKZZW6UYU
         api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7
-        api_key_file: "C:/Users/zisan/Downloads/AuthKey_CCKZZW6UYU.p8"  # Dosya yolu burada doğru şekilde verilmiştir
         submit_to_testflight: true
     cache:
       paths:
