@@ -2,26 +2,31 @@ workflows:
   ios-workflow:
     name: iOS Workflow
     environment:
-      flutter: stable  # Flutter stable sürümünü kullan
+      vars:
+        APP_STORE_CONNECT_API_KEY_ID: CCKZZW6UYU        # API Key ID
+        APP_STORE_CONNECT_API_KEY_ISSUER_ID: 2b87fc77-2aad-4934-8e80-12db199796b7  # API Key Issuer ID
+        APP_STORE_CONNECT_PRIVATE_KEY: |                # Private key, burada Base64 kodlu değil, dosya olarak kullanılır
+          -----BEGIN PRIVATE KEY-----
+          MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQggfFcZI50Q7rzSo+S
+          8oEGxkBoCRWNHshyQ3mJVLcNnwSgCgYIKoZIzj0DAQehRANCAAT1JEMM/YHu03Lx
+          FY5iTlgtYEqePpTtMiEZUqxO7nZUjRX7/OLO0YOUBW/UofWk2y4WFolUnSQ33LJW
+          3ThDHhhp
+          -----END PRIVATE KEY-----
     scripts:
-      - name: Flutter bağımlılıklarını yükle
+      - name: Build iOS
         script: |
           flutter pub get
-      - name: iOS için derleme yap
-        script: |
           flutter build ios --release --no-codesign
     artifacts:
-      - build/ios/ipa/*.ipa  # Derlenen IPA dosyasını sakla
+      - build/ios/ipa/*.ipa
     publishing:
       app_store_connect:
-        apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com  # Apple kimliği
-        app_specific_password: ydxn-hgqb-xqgq-xjya  # Apple uygulamaya özel parolası
-        api_key_id: CCKZZW6UYU  # App Store Connect API key ID
-        api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7  # API Key Issuer ID
-        api_key_file: "C:\\Users\\zisan\\Downloads\\AuthKey_CCKZZW6UYU.p8"  # API anahtarının dosya yolu
-        submit_to_testflight: true  # TestFlight'a gönder
-    cache:
-      paths:
-        - ~/.pub-cache
-        - ~/.cocoapods/repos
-        - ~/Library/Caches/CocoaPods
+        api_key_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com
+        api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7
+        api_key_private_key: -----BEGIN PRIVATE KEY-----
+        MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQggfFcZI50Q7rzSo+S
+        8oEGxkBoCRWNHshyQ3mJVLcNnwSgCgYIKoZIzj0DAQehRANCAAT1JEMM/YHu03Lx
+        FY5iTlgtYEqePpTtMiEZUqxO7nZUjRX7/OLO0YOUBW/UofWk2y4WFolUnSQ33LJW
+        3ThDHhhp
+        -----END PRIVATE KEY-----
+        submit_to_testflight: true
