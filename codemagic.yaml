@@ -2,25 +2,26 @@ workflows:
   ios-workflow:
     name: iOS Workflow
     environment:
-      flutter: stable
+      flutter: stable  # Flutter stable sürümünü kullan
     scripts:
       - name: Flutter bağımlılıklarını yükle
         script: |
-          cd C:/Users/zisan/OneDrive/Masaüstü/GitHub/newbesyo  # Projenizin bulunduğu dizine git
           flutter pub get
+      - name: iOS için derleme yap
+        script: |
           flutter build ios --release --no-codesign
     artifacts:
-      - build/ios/ipa/*.ipa
+      - build/ios/ipa/*.ipa  # Derlenen IPA dosyasını sakla
     publishing:
       app_store_connect:
-        apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com # Apple Kimliği
-        app_specific_password: tsbbes # Uygulamaya özel parola
-        api_key_id: CCKZZW6UYU
-        api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7
-        api_key_file: "C:\\Users\\zisan\\Downloads\\AuthKey_CCKZZW6UYU.p8" # API key dosyasının yolu
-        submit_to_testflight: true
+        apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com  # Apple kimliği
+        app_specific_password: ydxn-hgqb-xqgq-xjya  # Apple uygulamaya özel parolası
+        api_key_id: CCKZZW6UYU  # App Store Connect API key ID
+        api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7  # API Key Issuer ID
+        api_key_file: "C:\\Users\\zisan\\Downloads\\AuthKey_CCKZZW6UYU.p8"  # API anahtarının dosya yolu
+        submit_to_testflight: true  # TestFlight'a gönder
     cache:
       paths:
-        - C:\\Users\\zisan\\.pub-cache
-        - C:\\Users\\zisan\\Library\\Caches\\CocoaPods
-        - C:\\Users\\zisan\\.cocoapods\\repos
+        - ~/.pub-cache
+        - ~/.cocoapods/repos
+        - ~/Library/Caches/CocoaPods
