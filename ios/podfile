@@ -1,11 +1,10 @@
-platform :ios, '13.0'  # Buradaki sürümü ihtiyacınıza göre değiştirin
+platform :ios, '13.0'
+
+# Flutter Podfile
+flutter_application_path = '../'
+load File.join(flutter_application_path, '.flutter-plugins')
 
 target 'Runner' do
   use_frameworks!
-  
-  # Flutter bağımlılıklarını yüklemek için:
-  pod 'Flutter', :path => '../.flutter-plugins'
-
-  # Diğer bağımlılıkları ekleyebilirsiniz:
-  # pod 'Firebase', '~> 7.0'
+  flutter_install_all_ios_pods(flutter_application_path)
 end
