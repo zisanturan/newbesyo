@@ -12,7 +12,7 @@ workflows:
       - build/ios/ipa/*.ipa
     publishing:
       app_store_connect:
-        app_specific_password: tsbbes
+        app_specific_password: ydxn-hgqb-xqgq-xjya
         apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com
         api_key_id: CCKZZW6UYU
         api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7
