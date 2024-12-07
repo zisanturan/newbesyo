@@ -23,10 +23,5 @@ workflows:
       app_store_connect:
         api_key_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com
         api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7
-        api_key_private_key: -----BEGIN PRIVATE KEY-----
-        MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQggfFcZI50Q7rzSo+S
-        8oEGxkBoCRWNHshyQ3mJVLcNnwSgCgYIKoZIzj0DAQehRANCAAT1JEMM/YHu03Lx
-        FY5iTlgtYEqePpTtMiEZUqxO7nZUjRX7/OLO0YOUBW/UofWk2y4WFolUnSQ33LJW
-        3ThDHhhp
-        -----END PRIVATE KEY-----
+        api_key_private_key: tsbbes
         submit_to_testflight: true
