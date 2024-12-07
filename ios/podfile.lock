@@ -1,0 +1,22 @@
+PODS:
+  - cloud_firestore (version)
+  - firebase_analytics (version)
+  - firebase_auth (version)
+  - firebase_core (version)
+  - firebase_messaging (version)
+  - flutter (version)
+DEPENDENCIES:
+  - cloud_firestore
+  - firebase_analytics
+  - firebase_auth
+  - firebase_core
+  - firebase_messaging
+  - flutter
+SPEC CHECKSUMS:
+  cloud_firestore: <checksum>
+  firebase_analytics: <checksum>
+  firebase_auth: <checksum>
+  firebase_core: <checksum>
+  firebase_messaging: <checksum>
+  flutter: <checksum>
+PODFILE CHECKSUM: <checksum>

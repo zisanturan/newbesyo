@@ -1,0 +1,30 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '13.0'
+
+# CocoaPods master repository.
+# You can add additional sources if you have custom pod specs.
+source 'https://github.com/CocoaPods/Specs.git'
+
+# Flutter-specific pod configuration.
+# See the `flutter` plugin for further information
+flutter_application_path = '../'
+load File.join(flutter_application_path, '.flutter-plugins')
+
+target 'Runner' do
+  use_frameworks!
+  
+  # Pods for Runner
+  pod 'Firebase/Core', '~> 11.4.0'  # Firebase SDK'si için uygun versiyonu belirtin
+  pod 'Firebase/Analytics', '~> 11.4.0'  # Firebase Analytics
+  pod 'Firebase/Auth', '~> 11.4.0'  # Firebase Authentication
+  pod 'Firebase/Firestore', '~> 11.4.0'  # Firebase Firestore
+  pod 'Firebase/Messaging', '~> 11.4.0'  # Firebase Messaging
+  pod 'Flutter', :path => File.join(flutter_application_path, '.flutter-plugins')
+
+  # If you are using other Flutter plugins, add them below:
+  # pod 'plugin_name', :path => 'path_to_plugin'
+
+  # If you are using plugins that need to specify an SDK version:
+  # pod 'plugin_name', '~> version'
+
+end
