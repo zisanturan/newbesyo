@@ -23,5 +23,5 @@ workflows:
       app_store_connect:
         api_key_id: CCKZZW6UYU
         api_key_issuer_id: 2b87fc77-2aad-4934-8e80-12db199796b7
-        api_key_private_key: tsbbes
+        api_key_private_key: ydxn-hgqb-xqgq-xjya
         submit_to_testflight: true
