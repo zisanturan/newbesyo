@@ -22,6 +22,4 @@ workflows:
     publishing:
       app_store_connect:
         auth: integration  # Entegrasyon ile kimlik doğrulama
-        apple_id: turkiyesporbilimleri.com@turkiyesporbilimleri.com  # Apple Kimliği
-        app_specific_password: fxfn-hsgq-nppn-tbuy  # Uygulamaya özel parola
         submit_to_testflight: true  # TestFlight'a yükler
