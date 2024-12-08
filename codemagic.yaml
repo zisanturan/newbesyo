@@ -13,6 +13,7 @@ workflows:
     scripts:
       - name: Build iOS
         script: |
+          flutter --version
           flutter clean
           flutter pub get
           flutter upgrade
