@@ -15,9 +15,9 @@ workflows:
         script: |
           flutter clean
           flutter pub get
+          flutter upgrade
           cd ios
           pod install
-          flutter upgrade
           flutter build ios --release --no-codesign  # Kod imzalama yapmadan iOS uygulaması oluşturur
     artifacts:
       - build/ios/ipa/*.ipa  # IPA dosyasını çıktı olarak alır
