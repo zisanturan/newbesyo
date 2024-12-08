@@ -1,22 +1,54 @@
 PODS:
-  - cloud_firestore (version)
-  - firebase_analytics (version)
-  - firebase_auth (version)
-  - firebase_core (version)
-  - firebase_messaging (version)
-  - flutter (version)
+  - Flutter (1.0.0)
+  - firebase_analytics (11.3.5):
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+  - firebase_auth (5.3.3):
+    - FirebaseCore
+    - FirebaseAuthInterop
+  - firebase_core (3.8.0):
+    - FirebaseCore
+  - cloud_firestore (5.5.0):
+    - FirebaseCore
+    - FirebaseFirestore
+    - FirebaseAuth
+  - flutter_launcher_icons (0.14.1)
+  - flutter_svg (2.0.16)
+  - google_fonts (6.2.1)
+  - intl (0.20.1)
+  - shared_preferences (2.3.3)
+  - url_launcher (6.0.20)
+
 DEPENDENCIES:
-  - cloud_firestore
-  - firebase_analytics
-  - firebase_auth
-  - firebase_core
-  - firebase_messaging
-  - flutter
+  - flutter (from `Flutter`)
+  - firebase_analytics (from `.symlinks/plugins/firebase_analytics/darwin`)
+  - firebase_auth (from `.symlinks/plugins/firebase_auth/darwin`)
+  - firebase_core (from `.symlinks/plugins/firebase_core/darwin`)
+  - cloud_firestore (from `.symlinks/plugins/cloud_firestore/darwin`)
+  - flutter_launcher_icons (from `.symlinks/plugins/flutter_launcher_icons/darwin`)
+  - flutter_svg (from `.symlinks/plugins/flutter_svg/darwin`)
+  - google_fonts (from `.symlinks/plugins/google_fonts/darwin`)
+  - intl (from `.symlinks/plugins/intl/darwin`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/darwin`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/darwin`)
+
+EXTERNAL SOURCES:
+  flutter:
+    :path: Flutter
+
 SPEC CHECKSUMS:
-  cloud_firestore: <checksum>
-  firebase_analytics: <checksum>
-  firebase_auth: <checksum>
-  firebase_core: <checksum>
-  firebase_messaging: <checksum>
-  flutter: <checksum>
-PODFILE CHECKSUM: <checksum>
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  firebase_analytics: b1a2b8fa41275a75faefc1bcb990cfd567cf03ff
+  firebase_auth: 56eb1c2e4a129e0b3acb92074545f5ff7a1fd8e6
+  firebase_core: 9f0e25e592694d57fd68deec9ff78d60ad6bcb59
+  cloud_firestore: 8bc2b22c08b77a83532d2bb0709837cd090d2b32
+  flutter_launcher_icons: 29f6ff16a7f6a5f9cc5226ed274c5a7b4ba0fcd1
+  flutter_svg: 82db7ac0a92a8763e60d73027b45c7c2f12106ed
+  google_fonts: 254a64ff64c11c22b8fbd1f91c22e8fe6c68b4d5
+  intl: 2d8a1bc8ed5ed720fd8a029bca17192b0c1f2e6e
+  shared_preferences: 43ff2497e417d47f53043d1c42f764e4c85be000
+  url_launcher: 0e7761eb7e94f5f6e2a2339d07f108d18b628c99
+
+PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
+
+COCOAPODS: 1.11.3
