@@ -65,7 +65,7 @@ class ContactPage extends StatelessWidget {
                 style: GoogleFonts.poppins(fontSize: 16.0),
               ),
               onTap: () async {
-                const url = 'https://twitter.com/turkiyesporbilimleri';
+                const url = 'https://twitter.com';
                 if (await canLaunchUrl(Uri.parse(url))) {
                   await launchUrl(Uri.parse(url));
                 } else {
@@ -84,7 +84,7 @@ class ContactPage extends StatelessWidget {
                 style: GoogleFonts.poppins(fontSize: 16.0),
               ),
               onTap: () async {
-                const url = 'https://yourwebsite.com';
+                const url = '';
                 if (await canLaunchUrl(Uri.parse(url))) {
                   await launchUrl(Uri.parse(url));
                 } else {
