@@ -3,13 +3,13 @@ workflows:
     name: iOS Workflow
     environment:
       vars:
-        APP_STORE_CONNECT_API_KEY_ID: CCKZZW6UYU  # API Key ID
+        APP_STORE_CONNECT_API_KEY_ID: VM33JVN765  # API Key ID
         APP_STORE_CONNECT_API_KEY_ISSUER_ID: 2b87fc77-2aad-4934-8e80-12db199796b7  # API Key Issuer ID
         APP_STORE_CONNECT_PRIVATE_KEY: |
-          MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQggfFcZI50Q7rzSo+S
-          8oEGxkBoCRWNHshyQ3mJVLcNnwSgCgYIKoZIzj0DAQehRANCAAT1JEMM/YHu03Lx
-          FY5iTlgtYEqePpTtMiEZUqxO7nZUjRX7/OLO0YOUBW/UofWk2y4WFolUnSQ33LJW
-          3ThDHhhp  # Private Key
+          MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgjn7XdHBVryTY5mLe
+          3XeVYTv6YfVhUUD62ycHf0Xe7oegCgYIKoZIzj0DAQehRANCAARU6WWeYwT+9tbV
+          No/s2UOS0iiGXjph1YbF9mQ2bvbJpH4AvE1Z9PHDFr2dmMW+zUlcJSPe/m2F2ajw
+          tcqgmeMB  # Private Key
     scripts:
       - name: Build iOS
         script: |
