@@ -27,19 +27,18 @@ class DefaultFirebaseOptions {
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: "AIzaSyA1LshjHwkkTVmNlp3qS-oTqYMoK86bCrk",
     appId: "1:577376604543:android:8ee892046b89b32cc84a4a",
-    messagingSenderId: "YOUR_ANDROID_MESSAGING_SENDER_ID",
+    messagingSenderId: "577376604543",
     projectId: "besyocity-197ae",
     storageBucket: "YOUR_STORAGE_BUCKET",
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: "YOUR_IOS_API_KEY",
-    appId: "YOUR_IOS_APP_ID",
-    messagingSenderId: "YOUR_IOS_MESSAGING_SENDER_ID",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    iosClientId: "YOUR_IOS_CLIENT_ID",
-    iosBundleId: "YOUR_BUNDLE_ID",
+    apiKey: "AIzaSyA1LshjHwkkTVmNlp3qS-oTqYMoK86bCrk",
+    appId: "1:577376604543:ios:688a22443c6127bdc84a4a",
+    messagingSenderId: "577376604543",
+    projectId: "besyocity-197ae",
+    storageBucket: "besyocity-197ae.firebasestorage.app",
+    iosBundleId: "com.tsb.besyocity",
   );
 }
 
