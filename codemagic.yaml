@@ -21,7 +21,7 @@ workflows:
           pod repo update
           cd ios
           pod install
-          flutter build ios --release --no-codesign  # Kod imzalama yapmadan iOS uygulaması oluşturur
+          flutter build ios --release  
     artifacts:
       - build/ios/ipa/*.ipa  # IPA dosyasını çıktı olarak alır
     integrations:
