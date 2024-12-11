@@ -22,7 +22,6 @@ dependencies:
   shared_preferences: ^2.3.3
   flutter_native_splash: ^2.4.3
   flutter_launcher_icons: ^0.14.1
-  path_provider: ^2.0.11
   # flutter_launcher_icons için paket zaten eklendi
 
 dev_dependencies:
