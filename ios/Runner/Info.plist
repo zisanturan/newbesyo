@@ -53,7 +53,13 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
-	<!-- Telefon Yönlendirmesi İzinleri -->
+	<key>UIUserNotificationUsageDescription</key>
+	<string>Bu uygulama bildirim gönderecek. Lütfen izin verin.</string>
+	<!-- Telefon Erişimi İzinleri -->
+	<key>NSContactsUsageDescription</key>
+	<string>Uygulama, telefon rehberinize erişim istiyor.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Uygulama, kamera erişimi istiyor.</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tel</string>

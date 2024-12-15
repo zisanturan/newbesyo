@@ -1,6 +1,6 @@
 name: besyocity
 description: A new Flutter project for BESYOcity.
-version: 1.0.0+10
+version: 1.0.0+11
 
 environment:
   sdk: ">=2.19.6 <4.0.0"
