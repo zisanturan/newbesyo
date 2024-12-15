@@ -1,5 +1,9 @@
 plugins {
     id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'  // Google services plugin
+    id 'com.google.firebase.crashlytics' // Firebase Crashlytics plugin
+    // END: FlutterFire Configuration
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
@@ -24,17 +28,18 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = 3
         versionName = flutter.versionName
+        multiDexEnabled true // Enable multidex if your app exceeds 65k methods
     }
 
     signingConfigs {
         release {
             def keystoreProperties = new Properties()
-            def keystoreFile = file("key.properties") // Projeye göre yol belirleyin
+            def keystoreFile = file("key.properties")
 
             if (keystoreFile.exists()) {
                 keystoreProperties.load(new FileInputStream(keystoreFile))
 
-                storeFile file(keystoreProperties['storeFile']) // Keystore dosyasının yolu
+                storeFile file(keystoreProperties['storeFile'])
                 storePassword keystoreProperties['storePassword']
                 keyAlias keystoreProperties['keyAlias']
                 keyPassword keystoreProperties['keyPassword']
@@ -46,24 +51,23 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release // Release imzasını kullan
-            minifyEnabled true // R8 veya Proguard optimizasyonunu etkinleştirin
-            shrinkResources true // Gereksiz kaynakları temizleyin
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            // NDK sembol dosyalarını oluşturmak için tam debug sembol dosyalarını etkinleştirin
             ndk {
-                debugSymbolLevel 'FULL' // Debug sembol dosyalarını tam olarak oluştur
+                debugSymbolLevel 'FULL'
             }
         }
 
         debug {
-            signingConfig signingConfigs.release // Debug modda da aynı imzayı kullanabilirsiniz (opsiyonel)
+            signingConfig signingConfigs.release // You can remove this if you want debug to have a different signing config
         }
     }
 
     buildFeatures {
-        viewBinding true // Eğer View Binding kullanıyorsanız
+        viewBinding true
     }
 }
 

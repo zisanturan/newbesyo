@@ -18,7 +18,7 @@ dependencies:
   cloud_firestore: ^5.5.0
   intl: ^0.20.1
   firebase_messaging: ^15.1.5
-  firebase_analytics: ^11.3.5
+  firebase_analytics: ^11.3.6
   shared_preferences: ^2.3.3
   flutter_native_splash: ^2.4.3
   flutter_launcher_icons: ^0.14.1
@@ -67,8 +67,8 @@ flutter_launcher_icons:
   round_icon: true
 
 flutter_native_splash:
-  color: "#ffffff" # Arka plan rengi
-  image: assets/images/tsb.jpeg # Splash ekranı için görsel
+  color: "#ffffff"
+  image: assets/images/tsb.jpeg
   android: true
   ios: true
-  web: true # Eğer web platformu da kullanıyorsanız bunu ekleyebilirsiniz.
+  web: true
