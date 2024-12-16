@@ -3,26 +3,26 @@ import 'package:flutter/foundation.dart';
 
 Future<String> registerUser(String email, String password) async {
   try {
-    // Try to create a user with the provided email and password
+    // Sağlanan e-posta ve şifre ile kullanıcı oluşturmayı dene
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
 
-    // Log successful registration in debug mode
+    // Başarılı kayıt işlemini debug modunda logla
     if (kDebugMode) {
       print('Kayıt başarılı!');
     }
 
-    // Return success message
+    // Başarı mesajını döndür
     return 'Kayıt başarılı!';
   } catch (e) {
-    // Log error details in debug mode
+    // Hata detaylarını debug modunda logla
     if (kDebugMode) {
       print('Hata: $e');
     }
 
-    // Provide a user-friendly error message
+    // Kullanıcı dostu hata mesajı sağla
     if (e is FirebaseAuthException) {
       switch (e.code) {
         case 'email-already-in-use':

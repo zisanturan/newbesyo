@@ -29,7 +29,7 @@ class DefaultFirebaseOptions {
     appId: "1:577376604543:android:8ee892046b89b32cc84a4a",
     messagingSenderId: "577376604543",
     projectId: "besyocity-197ae",
-    storageBucket: "YOUR_STORAGE_BUCKET",
+    storageBucket: "besyocity-197ae.firebasestorage.app",
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
