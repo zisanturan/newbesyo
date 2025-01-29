@@ -22,7 +22,7 @@ android {
         applicationId = "com.tsb.besyocity"
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
-        versionCode = 3
+        versionCode = 15
         versionName = flutter.versionName
     }
 

@@ -91,9 +91,10 @@ class _SoruSorPageState extends State<SoruSorPage> {
     if (_isTop800) {
       _message = 'Tebrikler! Barajı geçtiğiniz için kazanma şansınız yüksek';
     } else if (_isAthlete) {
-      _message = 'Tebrikler! Milli sporcu olduğunuz için avantajlısınız.';
+      _message =
+          'Tebrikler! Milli sporcu olduğunuz için avantajlısınız. ${_selectedUniversity!} kazandınız.';
     } else if (ranking <= 500000) {
-      _message = 'Tebrikler! ${_selectedUniversity!} için uygun olabilirsiniz.';
+      _message = 'Tebrikler! ${_selectedUniversity!} için uygunsunuz.';
     } else {
       _message =
           'Maalesef, ${_selectedUniversity!} için sıralamanız yeterli görünmüyor.';

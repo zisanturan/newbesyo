@@ -15,7 +15,8 @@ class AboutPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 0, 210, 242), // Updated AppBar color
+        backgroundColor:
+            const Color.fromARGB(255, 0, 210, 242), // Updated AppBar color
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

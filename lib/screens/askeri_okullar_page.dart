@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AskeriOkullarPage extends StatelessWidget {
   const AskeriOkullarPage({super.key});
@@ -8,98 +9,119 @@ class AskeriOkullarPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Askeri Okullar'),
-        backgroundColor: const Color.fromARGB(255, 0, 64, 255), // Başlık rengi
+        backgroundColor: const Color(0xFF0040FF), // Başlık rengi
       ),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Başlık
             Text(
               'Askeri Okullar Nedir?',
-              style: TextStyle(
-                fontSize: 20,
+              style: GoogleFonts.roboto(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'Askeri okullar, askeri personel yetiştirmek amacıyla eğitim veren kurumlardır. '
-              'Bu okullar, disiplinli bir eğitim ile öğrencileri fiziksel, zihinsel ve sosyal anlamda '
-              'geliştirmeyi amaçlar.',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              'Askeri okullar, bir ülkenin askeri personel ihtiyacını karşılamak amacıyla eğitim veren disiplinli kurumlardır. '
+              'Bu okullar, öğrencilerin fiziksel dayanıklılıklarını artırmak, liderlik becerilerini geliştirmek ve askeri alanda gerekli olan teknik bilgileri kazandırmak için özel olarak tasarlanmıştır.',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.black54,
+                height: 1.5,
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // PMYO-POMEM Section
+            // Sınav Süreci
             Text(
-              'PMYO ve POMEM Okulları',
-              style: TextStyle(
-                fontSize: 20,
+              'Askeri Okulların Giriş Sınavı',
+              style: GoogleFonts.roboto(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'PMYO (Polis Meslek Yüksekokulu) ve POMEM (Polis Meslek Eğitim Merkezi), '
-              'polislik mesleğine aday öğrencilere eğitim veren kurumlardır. Bu okullarda verilen '
-              'eğitimler sayesinde öğrenciler, polislik mesleği için gerekli bilgi ve becerilere sahip olur.',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              'Askeri okullara giriş için adayların yazılı sınav, sağlık kontrolü, fiziksel yeterlilik testleri ve mülakat aşamalarını başarıyla geçmeleri gerekmektedir. '
+              'Bu süreçte genel yetenek, Türkçe, matematik ve genel kültür alanlarında yapılan yazılı sınavlar büyük önem taşır.',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.black54,
+                height: 1.5,
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Askeri Okul Kurslarımız Section
+            // Fiziksel Yeterlilik
             Text(
-              'Askeri Okul Kurslarımız',
-              style: TextStyle(
-                fontSize: 20,
+              'Fiziksel Yeterlilik Testleri',
+              style: GoogleFonts.roboto(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'TSB olarak askeri okul sınavlarına hazırlık için özel kurslar sunmaktayız. '
-              'Bu kurslarımız, sınavlarda başarılı olmanız için gerekli olan tüm bilgi ve becerileri kazandırmayı amaçlar.',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              'Askeri okulların fiziksel yeterlilik testlerinde adayların dayanıklılık, hız, çeviklik ve koordinasyon gibi özellikleri değerlendirilir. '
+              'Parkur sınavı, koşu, şınav ve mekik gibi fiziksel aktiviteler bu aşamanın temel bileşenlerindendir.',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.black54,
+                height: 1.5,
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Sağlık Parkuru Section
+            // Sözlü Mülakat
             Text(
-              'Sağlık Parkuru',
-              style: TextStyle(
-                fontSize: 20,
+              'Sözlü Mülakat Süreci',
+              style: GoogleFonts.roboto(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'Sağlık parkuru, askeri okul sınavlarında adayların fiziksel yeterliliklerini test etmek amacıyla yapılır. '
-              'TSB olarak, bu parkura yönelik özel hazırlık programlarımız ile adaylarımızın parkur sınavını başarıyla geçmelerini sağlamaktayız.',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              'Sözlü mülakat aşamasında adayların kendini ifade etme yeteneği, problem çözme becerisi ve liderlik potansiyeli değerlendirilmektedir. '
+              'Adayların bu aşamada başarılı olmaları için genel kültür bilgilerine hakim olmaları ve özgüvenlerini sergilemeleri gerekmektedir.',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.black54,
+                height: 1.5,
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Sözlü Mülakat Bilgisi Section
+            // Kazanma Stratejileri
             Text(
-              'Sözlü Mülakat Bilgisi',
-              style: TextStyle(
-                fontSize: 20,
+              'Askeri Okul Sınavını Kazanmak İçin Stratejiler',
+              style: GoogleFonts.roboto(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'Askeri okullara giriş sürecinde sözlü mülakatlar, adayların kendilerini ifade edebilme yeteneğini ve genel kültür bilgilerini değerlendirmek amacıyla yapılır. '
-              'Mülakat sürecinde başarı sağlamak için gereken stratejiler hakkında eğitimler sunmaktayız.',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              '1. Disiplinli Çalışma: Günlük bir çalışma planı hazırlayın ve düzenli bir şekilde uygulayın.\n\n'
+              '2. Fiziksel Hazırlık: Parkur sınavı ve fiziksel testler için düzenli spor yapın.\n\n'
+              '3. Genel Kültür Bilgisi: Güncel olaylar, tarih ve coğrafya konularında bilgi sahibi olun.\n\n'
+              '4. Deneme Sınavları: Sık sık deneme sınavları çözerek hızınızı ve doğruluğunuzu artırın.\n\n'
+              '5. Profesyonel Destek: İhtiyaç duyarsanız özel kurslara katılarak eksiklerinizi giderin.',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.black54,
+                height: 1.5,
+              ),
             ),
-            SizedBox(height: 20),
           ],
         ),
       ),

@@ -36,9 +36,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 style: TextButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 45, vertical: 20), // Buton iç boşlukları
-                  backgroundColor: const Color.fromARGB(255, 0, 0, 255), // Buton arka plan rengi
+                  backgroundColor: const Color.fromARGB(
+                      255, 0, 0, 255), // Buton arka plan rengi
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12), // Yuvarlatılmış kenarlar
+                    borderRadius:
+                        BorderRadius.circular(12), // Yuvarlatılmış kenarlar
                   ),
                 ),
                 child: const Text(

@@ -5,14 +5,12 @@ import 'package:url_launcher/url_launcher.dart';
 class Product {
   final String name;
   final String link;
-  final IconData icon;
-  final List<String>? images; // Optional field for images
+  final String image;
 
   Product({
     required this.name,
     required this.link,
-    required this.icon,
-    this.images, // Optional images list
+    required this.image,
   });
 }
 
@@ -30,53 +28,49 @@ class _ProductScreenState extends State<ProductScreen> {
       name: 'Top',
       link:
           'https://wa.me/905064668387?text=Merhaba%2C+Top+ürünü+ile+ilgili+detaylı+bilgi+almak+istiyorum',
-      icon: Icons.sports_soccer,
+      image: 'assets/images/top.jpeg',
     ),
     Product(
       name: 'Forma',
       link:
           'https://wa.me/905064668387?text=Merhaba%2C+Forma+ürünü+ile+ilgili+detaylı+bilgi+almak+istiyorum',
-      icon: Icons.sports_handball,
+      image: 'assets/images/tshirt.jpeg',
     ),
     Product(
       name: 'Mont',
       link:
           'https://wa.me/905064668387?text=Merhaba%2C+Mont+ürünü+ile+ilgili+detaylı+bilgi+almak+istiyorum',
-      icon: Icons.ac_unit,
+      image: 'assets/images/cceket.jpeg',
     ),
     Product(
       name: 'Çorap',
       link:
           'https://wa.me/905064668387?text=Merhaba%2C+Çorap+ürünü+ile+ilgili+detaylı+bilgi+almak+istiyorum',
-      icon: Icons.checkroom,
+      image: 'assets/images/corap.jpeg',
     ),
     Product(
       name: 'Sweatshirt',
       link:
           'https://wa.me/905064668387?text=Merhaba%2C+Sweatshirt+ürünü+ile+ilgili+detaylı+bilgi+almak+istiyorum',
-      icon: Icons.hiking,
+      image: 'assets/images/seat.jpeg',
     ),
     Product(
       name: 'Ayakkabı',
       link:
           'https://wa.me/905064668387?text=Merhaba%2C+Ayakkabı+ürünü+ile+ilgili+detaylı+bilgi+almak+istiyorum',
-      icon: Icons.run_circle,
+      image: 'assets/images/ayakkabi.jpeg',
     ),
     Product(
       name: 'Yağmurluk',
       link:
           'https://wa.me/905064668387?text=Merhaba%2C+Yağmurluk+ürünü+ile+ilgili+detaylı+bilgi+almak+istiyorum',
-      icon: Icons.umbrella,
+      image: 'assets/images/cceket.jpeg',
     ),
     Product(
       name: 'Kitap',
       link:
           'https://wa.me/905064668387?text=Merhaba%2C+Kitap+ürünü+ile+ilgili+detaylı+bilgi+almak+istiyorum',
-      icon: Icons.book,
-      images: [
-        'assets/images/kitap2.jpeg',
-        'assets/images/kitap1.jpeg',
-      ],
+      image: 'assets/images/kitap1.jpeg',
     ),
   ];
 
@@ -128,24 +122,13 @@ class _ProductScreenState extends State<ProductScreen> {
                             top: Radius.circular(10)),
                       ),
                       child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              product.icon,
-                              size: 40,
-                              color: const Color(0xFF0028FF),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              product.name,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF0028FF),
-                              ),
-                            ),
-                          ],
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(10)),
+                          child: Image.asset(
+                            product.image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -155,6 +138,15 @@ class _ProductScreenState extends State<ProductScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                          product.name,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF0028FF),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
                         if (productClicked[index])
                           ElevatedButton.icon(
                             onPressed: () => _launchUrl(product.link),
@@ -172,25 +164,6 @@ class _ProductScreenState extends State<ProductScreen> {
                               'İletişime Geçin',
                               style:
                                   TextStyle(fontSize: 14, color: Colors.white),
-                            ),
-                          ),
-                        if (product.name == 'Kitap' && productClicked[index])
-                          SizedBox(
-                            height: 150,
-                            child: PageView.builder(
-                              itemCount: product.images!.length,
-                              itemBuilder: (context, pageIndex) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.asset(
-                                      product.images![pageIndex],
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                );
-                              },
                             ),
                           ),
                       ],

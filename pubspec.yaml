@@ -1,6 +1,6 @@
 name: besyocity
 description: A new Flutter project for BESYOcity.
-version: 1.0.0+13
+version: 1.0.0+15
 
 environment:
   sdk: ">=2.19.6 <4.0.0"
@@ -11,7 +11,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.16
   font_awesome_flutter: ^10.0.0
-  url_launcher: ^6.0.20
+  url_launcher: ^6.0.0
   google_fonts: ^6.2.1
   firebase_core: ^3.8.1
   firebase_auth: ^5.3.3
@@ -23,6 +23,8 @@ dependencies:
   shared_preferences: ^2.3.3
   flutter_native_splash: ^2.4.3
   flutter_launcher_icons: ^0.14.1
+  video_player: ^2.9.2
+  webview_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +60,21 @@ flutter:
     - assets/images/tsb.jpeg
     - assets/images/kitap1.jpeg
     - assets/images/kitap2.jpeg
+    - assets/images/sl1.png
+    - assets/images/sl2.png
+    - assets/images/sl3.png
+    - assets/images/sl4.png
+    - assets/images/top.jpeg
+    - assets/images/seat.jpeg
+    - assets/images/ayakkabi.jpeg
+    - assets/images/tshirt.jpeg
+    - assets/images/corap.jpeg
+    - assets/images/cceket.jpeg
+    - assets/images/video1.mp4
+    - assets/images/video2.mp4
+    - assets/images/parkur.jpg
+    - assets/images/besyo.jpg
+    - assets/images/test.jpg
 
 flutter_launcher_icons:
   android: true

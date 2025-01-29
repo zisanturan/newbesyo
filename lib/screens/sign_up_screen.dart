@@ -1,49 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
-import 'auth_screen.dart'; // Giriş ekranı
+import 'package:google_fonts/google_fonts.dart';
+// Giriş ekranı
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _SignUpScreenState createState() => _SignUpScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-// Şehir kontrolü için ekledim
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _surnameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _smsController = TextEditingController();
+  final _birthDateController = TextEditingController();
   bool _isLoading = false;
-  String _selectedGender = 'Erkek'; // Varsayılan cinsiyet
-  bool _isPrivacyPolicyAccepted = false; // Gizlilik politikası onayı
-  String _selectedCity = 'İstanbul'; // Varsayılan şehir
+  bool _isPhoneVerified = false;
+  String? _verificationId;
+  int? _resendToken;
 
-  // Türkiye'deki şehirler
+  // Türkiye'nin tüm illeri alfabetik sırayla
   final List<String> _cities = [
     'Adana',
     'Adıyaman',
     'Afyonkarahisar',
     'Ağrı',
-    'Aksaray',
     'Amasya',
     'Ankara',
     'Antalya',
-    'Ardahan',
     'Artvin',
     'Aydın',
     'Balıkesir',
-    'Bartın',
-    'Batman',
-    'Bayburt',
     'Bilecik',
     'Bingöl',
     'Bitlis',
@@ -55,7 +48,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     'Çorum',
     'Denizli',
     'Diyarbakır',
-    'Düzce',
     'Edirne',
     'Elazığ',
     'Erzincan',
@@ -64,177 +56,234 @@ class _SignUpScreenState extends State<SignUpScreen> {
     'Gaziantep',
     'Giresun',
     'Gümüşhane',
-    'Hakkâri',
+    'Hakkari',
     'Hatay',
-    'Iğdır',
     'Isparta',
+    'Mersin',
     'İstanbul',
     'İzmir',
-    'Kahramanmaraş',
-    'Karabük',
-    'Karaman',
     'Kars',
     'Kastamonu',
     'Kayseri',
-    'Kırıkkale',
     'Kırklareli',
     'Kırşehir',
-    'Kilis',
     'Kocaeli',
     'Konya',
     'Kütahya',
     'Malatya',
     'Manisa',
+    'Kahramanmaraş',
     'Mardin',
-    'Mersin',
     'Muğla',
     'Muş',
     'Nevşehir',
     'Niğde',
     'Ordu',
-    'Osmaniye',
     'Rize',
     'Sakarya',
     'Samsun',
-    'Şanlıurfa',
     'Siirt',
     'Sinop',
     'Sivas',
-    'Şırnak',
     'Tekirdağ',
     'Tokat',
     'Trabzon',
     'Tunceli',
+    'Şanlıurfa',
     'Uşak',
     'Van',
-    'Yalova',
     'Yozgat',
-    'Zonguldak'
+    'Zonguldak',
+    'Aksaray',
+    'Bayburt',
+    'Karaman',
+    'Kırıkkale',
+    'Batman',
+    'Şırnak',
+    'Bartın',
+    'Ardahan',
+    'Iğdır',
+    'Yalova',
+    'Karabük',
+    'Kilis',
+    'Osmaniye',
+    'Düzce'
   ];
 
-  Future<void> _register() async {
-    if (_validateForm()) {
-      setState(() {
-        _isLoading = true;
-      });
+  String? _selectedCity; // Seçilen şehri tutmak için
 
-      try {
-        UserCredential userCredential =
-            await _auth.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
+  Future<void> _verifyPhone() async {
+    if (_phoneController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lütfen telefon numaranızı girin')),
+      );
+      return;
+    }
 
-        await _firestore.collection('users').doc(userCredential.user!.uid).set({
-          'adSoyad': _nameController.text.trim(),
-          'dogumTarihi': _dobController.text.trim(),
-          'cinsiyet': _selectedGender,
-          'telefon': _phoneController.text.trim(),
-          'email': _emailController.text.trim(),
-          'sehir': _selectedCity, // Şehir bilgisi ekledim
-          'uid': userCredential.user!.uid,
-        });
+    setState(() {
+      _isLoading = true;
+    });
 
-        if (mounted) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const AuthScreen()),
+    try {
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: '+90${_phoneController.text}',
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // Android cihazlarda otomatik doğrulama
+          await FirebaseAuth.instance.signInWithCredential(credential);
+          setState(() {
+            _isPhoneVerified = true;
+            _isLoading = false;
+          });
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          setState(() {
+            _isLoading = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Doğrulama hatası: ${e.message}')),
           );
-        }
-      } catch (e) {
-        setState(() {
-          _isLoading = false;
-        });
-
-        if (mounted) {
-          _showErrorDialog("Kayıt Başarısız", e.toString());
-        }
-      }
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          setState(() {
+            _verificationId = verificationId;
+            _resendToken = resendToken;
+            _isLoading = false;
+          });
+          _showSMSDialog();
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          setState(() {
+            _verificationId = verificationId;
+            _isLoading = false;
+          });
+        },
+        forceResendingToken: _resendToken,
+      );
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Hata: $e')),
+      );
     }
   }
 
-  bool _validateForm() {
-    if (_nameController.text.isEmpty ||
-        _dobController.text.isEmpty ||
-        _phoneController.text.isEmpty ||
-        _emailController.text.isEmpty ||
-        _passwordController.text.isEmpty ||
-        _selectedCity.isEmpty) {
-      // Şehir kontrolü ekledim
-      _showErrorDialog("Eksik Bilgi", "Lütfen tüm alanları doldurun.");
-      return false;
-    }
+  Future<void> _verifySMSCode(String smsCode) async {
+    if (_verificationId == null) return;
 
-    if (!_isValidEmail(_emailController.text.trim())) {
-      _showErrorDialog("Geçersiz E-posta", "Lütfen geçerli bir e-posta girin.");
-      return false;
-    }
+    setState(() {
+      _isLoading = true;
+    });
 
-    if (!_isValidPhone(_phoneController.text.trim())) {
-      _showErrorDialog(
-          "Geçersiz Telefon", "Lütfen geçerli bir telefon numarası girin.");
-      return false;
-    }
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: _verificationId!,
+        smsCode: smsCode,
+      );
 
-    if (!_isStrongPassword(_passwordController.text.trim())) {
-      _showErrorDialog("Geçersiz Şifre",
-          "Şifreniz en az 8 karakter, bir rakam içermelidir.");
-      return false;
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      setState(() {
+        _isPhoneVerified = true;
+        _isLoading = false;
+      });
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop(); // SMS dialog'unu kapat
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Geçersiz kod')),
+      );
     }
-
-    if (!_isPrivacyPolicyAccepted) {
-      _showErrorDialog("Gizlilik Politikası",
-          "Gizlilik politikasını kabul etmeniz gerekiyor.");
-      return false;
-    }
-
-    return true;
   }
 
-  bool _isValidEmail(String email) {
-    final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-    return emailRegex.hasMatch(email);
-  }
-
-  bool _isValidPhone(String phone) {
-    final phoneRegex =
-        RegExp(r'^(05\d{9})$'); // Türk telefon numarası, 5 ile başlayan
-    return phoneRegex.hasMatch(phone);
-  }
-
-  bool _isStrongPassword(String password) {
-    final passwordRegex = RegExp(r'^(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$');
-    return passwordRegex.hasMatch(password);
-  }
-
-  void _showErrorDialog(String title, String message) {
+  void _showSMSDialog() {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: Text(title),
-        content: Text(message),
+        title: const Text('SMS Kodunu Girin'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: _smsController,
+              keyboardType: TextInputType.number,
+              maxLength: 6,
+              decoration: const InputDecoration(
+                labelText: 'SMS Kodu',
+              ),
+            ),
+          ],
+        ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Tamam"),
+            onPressed: () {
+              Navigator.of(context).pop();
+              _verifyPhone(); // Yeni kod gönder
+            },
+            child: const Text('Yeni Kod Gönder'),
+          ),
+          ElevatedButton(
+            onPressed: () => _verifySMSCode(_smsController.text),
+            child: const Text('Doğrula'),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
+  Future<void> _signUp() async {
+    if (!_formKey.currentState!.validate()) return;
+    if (!_isPhoneVerified) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lütfen telefon numaranızı doğrulayın')),
+      );
+      return;
+    }
 
-    if (selectedDate != null) {
-      setState(() {
-        _dobController.text = DateFormat('dd/MM/yyyy').format(selectedDate);
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+
+      // Firestore'a kullanıcı bilgilerini kaydet
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'name': _nameController.text,
+        'surname': _surnameController.text,
+        'phone': _phoneController.text,
+        'email': _emailController.text.trim(),
+        'birthDate': _birthDateController.text,
+        'city': _selectedCity,
+        'phoneVerified': true,
+        'createdAt': FieldValue.serverTimestamp(),
       });
+
+      if (mounted) {
+        Navigator.pop(context);
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Kayıt olurken hata: $e')),
+        );
+      }
     }
   }
 
@@ -242,176 +291,219 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kayıt Ol'),
-        backgroundColor: const Color.fromARGB(255, 0, 64, 255), // Blue color
-        centerTitle: true,
+        title: Text(
+          'Kayıt Ol',
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: const Color.fromARGB(255, 0, 64, 255),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            Image.asset(
-              'assets/images/besyo_logo.png',
-              height: 120,
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Hesap Oluştur',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFFED2D3F), // Red color
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  labelText: 'Ad',
+                  filled: true,
+                  fillColor: const Color(0xFF31E1F7),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
                   ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-            _buildTextField(
-              controller: _nameController,
-              label: 'Ad ve Soyad',
-              icon: Icons.person,
-              color: const Color.fromARGB(255, 0, 153, 255), // Aqua color
-            ),
-            const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () => _selectDate(context),
-              child: AbsorbPointer(
-                child: _buildTextField(
-                  controller: _dobController,
-                  label: 'Doğum Tarihi (GG/AA/YYYY)',
-                  icon: Icons.calendar_today,
-                  color: const Color.fromARGB(255, 0, 140, 255),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen adınızı girin';
+                  }
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 10),
-            DropdownButtonFormField<String>(
-              value: _selectedGender,
-              onChanged: (value) {
-                setState(() {
-                  _selectedGender = value!;
-                });
-              },
-              items: ['Erkek', 'Kadın'].map((gender) {
-                return DropdownMenuItem<String>(
-                  value: gender,
-                  child: Text(gender),
-                );
-              }).toList(),
-              decoration: InputDecoration(
-                labelText: 'Cinsiyet',
-                prefixIcon: const Icon(Icons.transgender,
-                    color: Color.fromARGB(255, 0, 182, 254)),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _surnameController,
+                decoration: InputDecoration(
+                  labelText: 'Soyad',
+                  filled: true,
+                  fillColor: const Color(0xFF31E1F7),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen soyadınızı girin';
+                  }
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 10),
-            _buildTextField(
-              controller: _phoneController,
-              label: 'Telefon Numarası',
-              icon: Icons.phone,
-              keyboardType: TextInputType.phone,
-              color: const Color.fromARGB(255, 0, 162, 255),
-            ),
-            const SizedBox(height: 10),
-            _buildTextField(
-              controller: _emailController,
-              label: 'E-posta',
-              icon: Icons.email,
-              keyboardType: TextInputType.emailAddress,
-              color: const Color.fromARGB(255, 0, 153, 255),
-            ),
-            const SizedBox(height: 10),
-            _buildTextField(
-              controller: _passwordController,
-              label: 'Şifre',
-              icon: Icons.lock,
-              obscureText: true,
-              color: const Color.fromARGB(255, 0, 174, 255),
-            ),
-            const SizedBox(height: 10),
-            DropdownButtonFormField<String>(
-              value: _selectedCity,
-              onChanged: (value) {
-                setState(() {
-                  _selectedCity = value!;
-                });
-              },
-              items: _cities.map((city) {
-                return DropdownMenuItem<String>(
-                  value: city,
-                  child: Text(city),
-                );
-              }).toList(),
-              decoration: InputDecoration(
-                labelText: 'Şehir',
-                prefixIcon: const Icon(Icons.location_city,
-                    color: Color.fromARGB(255, 0, 182, 254)),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            // Gizlilik Politikası Onay Kutusu
-            Row(
-              children: [
-                Checkbox(
-                  value: _isPrivacyPolicyAccepted,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      _isPrivacyPolicyAccepted = value!;
-                    });
-                  },
-                ),
-                const Text("Gizlilik politikasını kabul ediyorum."),
-              ],
-            ),
-            const SizedBox(height: 20),
-            _isLoading
-                ? const CircularProgressIndicator()
-                : ElevatedButton(
-                    onPressed: _register,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          const Color.fromARGB(255, 0, 64, 255), // Blue color
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 15,
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _phoneController,
+                      decoration: InputDecoration(
+                        labelText: 'Telefon',
+                        prefixText: '+90 ',
+                        filled: true,
+                        fillColor: const Color(0xFF31E1F7),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        suffixIcon: _isPhoneVerified
+                            ? const Icon(Icons.check_circle,
+                                color: Colors.green)
+                            : null,
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    child: const Text(
-                      'Kayıt Ol',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      keyboardType: TextInputType.phone,
+                      enabled: !_isPhoneVerified,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Lütfen telefon numaranızı girin';
+                        }
+                        return null;
+                      },
                     ),
                   ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required IconData icon,
-    TextInputType keyboardType = TextInputType.text,
-    bool obscureText = false,
-    required Color color,
-  }) {
-    return TextField(
-      controller: controller,
-      keyboardType: keyboardType,
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(icon, color: color),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
+                  if (!_isPhoneVerified)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: ElevatedButton(
+                        onPressed: _verifyPhone,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        ),
+                        child: const Text('Doğrula'),
+                      ),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: 'E-posta',
+                  filled: true,
+                  fillColor: const Color(0xFF31E1F7),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen e-posta adresinizi girin';
+                  }
+                  if (!value.contains('@')) {
+                    return 'Geçerli bir e-posta adresi girin';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Şifre',
+                  filled: true,
+                  fillColor: const Color(0xFF31E1F7),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen şifre girin';
+                  }
+                  if (value.length < 6) {
+                    return 'Şifre en az 6 karakter olmalıdır';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _birthDateController,
+                decoration: InputDecoration(
+                  labelText: 'Doğum Tarihi (GG/AA/YYYY)',
+                  hintText: 'Örn: 01/01/1990',
+                  filled: true,
+                  fillColor: const Color(0xFF31E1F7),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                keyboardType: TextInputType.datetime,
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<String>(
+                value: _selectedCity,
+                decoration: InputDecoration(
+                  labelText: 'Şehir',
+                  filled: true,
+                  fillColor: const Color(0xFF31E1F7),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                items: _cities.map((String city) {
+                  return DropdownMenuItem<String>(
+                    value: city,
+                    child: Text(city),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedCity = newValue;
+                  });
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen şehir seçin';
+                  }
+                  return null;
+                },
+                dropdownColor: Colors.white,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpanded: true,
+              ),
+              const SizedBox(height: 24),
+              _isLoading
+                  ? const CircularProgressIndicator()
+                  : ElevatedButton(
+                      onPressed: _signUp,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 0, 64, 255),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 15,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text(
+                        'Kayıt Ol',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+            ],
+          ),
         ),
       ),
     );

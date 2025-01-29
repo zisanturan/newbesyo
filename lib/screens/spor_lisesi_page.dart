@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SporLisesiPage extends StatelessWidget {
   const SporLisesiPage({super.key});
@@ -8,79 +9,120 @@ class SporLisesiPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Spor Lisesi'),
-        backgroundColor: const Color.fromARGB(255, 0, 64, 255), // Başlık rengi
+        backgroundColor: const Color.fromARGB(255, 8, 0, 255), // Başlık rengi
       ),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Başlık
             Text(
-              'Spor Lisesi Nedir?',
-              style: TextStyle(
-                fontSize: 20,
+              'Spor Liseleri Nedir?',
+              style: GoogleFonts.roboto(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'Spor liseleri, spor eğitimi alanında genç yetenekleri desteklemek ve geliştirmek amacıyla kurulmuş eğitim kurumlarıdır. '
-              'Bu liseler, öğrencilere spor branşlarında hem teorik hem de pratik eğitim sunar.',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              'Spor liseleri, sportif yetenekleri geliştirmek ve öğrencileri profesyonel spor kariyerine hazırlamak amacıyla eğitim veren kurumlardır. '
+              'Bu liselerde öğrenciler, hem akademik dersler hem de spor alanında özel eğitim alır.',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.black54,
+                height: 1.5,
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Spor Lisesi Kurslarımız Section
+            // Eğitim Programı
             Text(
-              'Spor Lisesi Kurslarımız',
-              style: TextStyle(
-                fontSize: 20,
+              'Spor Liselerinde Eğitim Programı',
+              style: GoogleFonts.roboto(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'TSB olarak, spor lisesi sınavlarına hazırlık kurslarımız ile adayların başarılı olmasını sağlıyoruz. '
-              'Bu kurslarda, spor liselerine giriş için gereken fiziksel ve teorik bilgiler verilmektedir.',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              'Spor liselerinde, öğrenciler hem genel lise müfredatına hem de spor odaklı derslere katılır. '
+              'Spor dersleri arasında futbol, basketbol, voleybol, atletizm, yüzme ve daha birçok branş yer alır. '
+              'Ayrıca, öğrenciler anatomi, spor fizyolojisi ve beslenme gibi derslerle de desteklenir.',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.black54,
+                height: 1.5,
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Hazırlık Programı Section
+            // Giriş Koşulları
             Text(
-              'Hazırlık Programımız',
-              style: TextStyle(
-                fontSize: 20,
+              'Spor Liselerine Giriş Koşulları',
+              style: GoogleFonts.roboto(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'Spor liselerine giriş sürecinde adayların fiziksel ve akademik anlamda yeterli olması beklenir. '
-              'Hazırlık programlarımız, adayların sınav ve mülakat süreçlerine en iyi şekilde hazırlanmalarını sağlar.',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              'Spor liselerine kabul edilmek için belirli şartlar sağlanmalıdır. Bunlar arasında:\n\n'
+              '- Spor yetenek sınavlarında başarılı olmak\n'
+              '- Akademik başarı düzeyi\n'
+              '- Sağlık raporu ve spor yapmaya engel bir durumun olmaması\n'
+              'yer alır. Ayrıca, başvurularda genellikle yetenek sınavı ve mülakat aşamaları bulunur.',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.black54,
+                height: 1.5,
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Liseler Hakkında Bilgi Section
+            // Sporcu Olma Yolları
             Text(
-              'Liseler Hakkında Bilgi',
-              style: TextStyle(
-                fontSize: 20,
+              'Profesyonel Sporcu Olma Yolunda Spor Liseleri',
+              style: GoogleFonts.roboto(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'Türkiye\'de spor liseleri, öğrencilere akademik eğitimin yanı sıra spor alanında da yoğun bir eğitim sunar. '
-              'Spor liseleri, öğrencilerin spor kariyerlerine yönelik sağlam bir temel oluşturur.',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              'Spor liseleri, öğrencilerin profesyonel sporcu olma yolunda ilk adımı atmalarına yardımcı olur. '
+              'Bu liselerde alınan eğitim, yeteneklerin gelişmesini sağlar ve üniversitelerin spor bölümlerine geçişi kolaylaştırır.',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.black54,
+                height: 1.5,
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+
+            // Spor Liselerinde Kariyer Fırsatları
+            Text(
+              'Spor Liselerinde Kariyer Fırsatları',
+              style: GoogleFonts.roboto(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Spor liselerinden mezun olan öğrenciler, üniversitelerin spor bilimleri, beden eğitimi öğretmenliği, antrenörlük veya fizyoterapi gibi bölümlerine geçiş yapabilir. '
+              'Ayrıca, profesyonel spor kulüplerinde kariyer yapma şansı elde edebilirler.',
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.black54,
+                height: 1.5,
+              ),
+            ),
           ],
         ),
       ),

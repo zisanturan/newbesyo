@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'screens/splash_screen.dart'; // SplashScreen için yeni bir dosya
-import 'firebase_options.dart'; // Firebase yapılandırma dosyası
+import 'screens/splash_screen.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,7 +10,7 @@ void main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
   } catch (e) {
-    runApp(const ErrorApp()); // Hata durumunda alternatif ekran göster
+    runApp(const ErrorApp());
     return;
   }
   runApp(const MyApp());
@@ -47,4 +47,3 @@ class ErrorApp extends StatelessWidget {
     );
   }
 }
-
